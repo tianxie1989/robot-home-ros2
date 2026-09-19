@@ -1,0 +1,9 @@
+# 网络配置
+network:
+  ros_domain_id: 0
+  dds_implementation: "rmw_cyclonedds_cpp"
+  # 多机通信时的主机IP（训练服务器）
+  discovery_servers: []
+  # 超时设置（秒）
+  heartbeat_period: 1.0
+  connection_timeout: 5.0

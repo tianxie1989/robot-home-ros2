@@ -1,0 +1,11 @@
+# 深度相机配置 (Intel RealSense D435i)
+depth_camera:
+  device_serial: ""              # 留空自动检测
+  width: 640
+  height: 480
+  fps: 30
+  depth_unit: "mm"              # 深度单位: mm | m
+  depth_scale: 0.001            # 深度值缩放因子 (mm->m)
+  depth_min: 0.1                # 最小有效深度(米)
+  depth_max: 5.0                # 最大有效深度(米)
+  align_depth_to_color: true    # 深度图对齐到RGB

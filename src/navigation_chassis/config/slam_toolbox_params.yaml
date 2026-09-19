@@ -1,0 +1,39 @@
+# SLAM Toolbox 参数配置
+slam_toolbox:
+  ros__parameters:
+    # 工作模式: mapping / localization
+    solver_plugin: solver_plugins::CeresSolver
+    ceres_linear_solver: SPARSE_NORMAL_CHOLESKY
+    ceres_preconditioner: SCHUR_JACOBI
+    ceres_trust_strategy: LEVENBERG_MARQUARDT
+    ceres_dogleg_type: TRADITIONAL_DOGLEG
+    ceres_loss_function: None
+
+    # 基础参数
+    odom_frame: odom
+    map_frame: map
+    base_frame: base_link
+    scan_topic: /scan
+    mode: mapping
+
+    # 地图参数
+    resolution: 0.05
+    max_laser_range: 12.0
+    minimum_travel_distance: 0.2
+    minimum_travel_heading: 0.1
+
+    # 闭环检测
+    loop_search_maximum_distance: 3.0
+    do_loop_closing: true
+    loop_match_minimum_chain_size: 10
+    loop_match_maximum_variance_coarse: 3.0
+    loop_match_minimum_response_coarse: 0.35
+
+    # 序列化
+    map_file_name: ""
+    map_start_pose_at: [0.0, 0.0, 0.0]
+
+    # 终身建图
+    lifetime_map: true
+    debug_logging: false
+    throttle_scans: 1

@@ -1,0 +1,96 @@
+# MoveIt2 规划配置 - 6DOF机械臂 + 夹爪
+# arm_control/config/moveit_config.yaml
+
+planning_pipelines:
+  pipeline_names:
+    - ompl
+
+planning_plugins:
+  - ompl_interface/OMPLPlanner
+
+request_adapters:
+  - default_planning_request_adapters/ResolveConstraintFrames
+  - default_planning_request_adapters/ValidateWorkspaceBounds
+  - default_planning_request_adapters/CheckStartStateBounds
+  - default_planning_request_adapters/CheckStartStateCollision
+
+response_adapters:
+  - default_planning_response_adapters/AddTimeOptimalParameterization
+  - default_planning_response_adapters/ValidateSolution
+  - default_planning_response_adapters/DisplayMotionPath
+
+# 规划组定义
+planning_groups:
+  - name: arm
+    joints:
+      - joint_1
+      - joint_2
+      - joint_3
+      - joint_4
+      - joint_5
+      - joint_6
+    default_planner: RRTConnect
+
+  - name: gripper
+    joints:
+      - gripper_joint
+    default_planner: RRTConnect
+
+# 默认规划器配置
+default_planner_config: RRTConnect
+
+planner_configs:
+  RRTConnect:
+    type: geometric::RRTConnect
+    range: 0.0
+  RRTstar:
+    type: geometric::RRTstar
+    range: 0.0
+    goal_bias: 0.05
+    delay_collision_checking: true
+  PRM:
+    type: geometric::PRM
+    max_nearest_neighbors: 10
+
+# 运动学求解器
+kinematics_solver: kdl_kinematics_plugin/KDLKinematicsPlugin
+kinematics_solver_search_resolution: 0.005
+kinematics_solver_timeout: 0.05
+
+# 关节模型限制
+joint_limits:
+  joint_1:
+    has_velocity_limits: true
+    max_velocity: 1.5
+    has_acceleration_limits: true
+    max_acceleration: 3.0
+  joint_2:
+    has_velocity_limits: true
+    max_velocity: 1.5
+    has_acceleration_limits: true
+    max_acceleration: 3.0
+  joint_3:
+    has_velocity_limits: true
+    max_velocity: 2.0
+    has_acceleration_limits: true
+    max_acceleration: 4.0
+  joint_4:
+    has_velocity_limits: true
+    max_velocity: 2.0
+    has_acceleration_limits: true
+    max_acceleration: 4.0
+  joint_5:
+    has_velocity_limits: true
+    max_velocity: 2.5
+    has_acceleration_limits: true
+    max_acceleration: 5.0
+  joint_6:
+    has_velocity_limits: true
+    max_velocity: 2.5
+    has_acceleration_limits: true
+    max_acceleration: 5.0
+  gripper_joint:
+    has_velocity_limits: true
+    max_velocity: 0.5
+    has_acceleration_limits: true
+    max_acceleration: 1.0

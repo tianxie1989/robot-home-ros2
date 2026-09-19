@@ -1,0 +1,39 @@
+# 关节限位配置
+arm_joint_limits:
+  arm_joint_1:
+    lower: -3.14
+    upper: 3.14
+    velocity: 1.5
+    effort: 10.0
+  arm_joint_2:
+    lower: -1.57
+    upper: 1.57
+    velocity: 1.2
+    effort: 15.0
+  arm_joint_3:
+    lower: -2.0
+    upper: 2.0
+    velocity: 1.5
+    effort: 12.0
+  arm_joint_4:
+    lower: -3.14
+    upper: 3.14
+    velocity: 2.0
+    effort: 5.0
+  arm_joint_5:
+    lower: -1.57
+    upper: 1.57
+    velocity: 2.0
+    effort: 5.0
+  arm_joint_6:
+    lower: -3.14
+    upper: 3.14
+    velocity: 2.5
+    effort: 3.0
+
+gripper_joint_limits:
+  gripper_left_finger_joint:
+    lower: 0.0
+    upper: 0.04
+    velocity: 0.1
+    effort: 10.0

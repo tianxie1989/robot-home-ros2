@@ -1,0 +1,29 @@
+# LLM 大语言模型对话配置（仅 Ollama 后端）
+# voice_interaction/config/llm_config.yaml
+#
+# ⚠️ 顶层键 `dialog_manager` 必须与 launch 里的节点名一致
+#    （voice.launch.py 中 Node(name='dialog_manager')），否则参数会被静默忽略，
+#    节点全部使用代码内默认值。
+#    排查：ros2 param list /dialog_manager
+
+dialog_manager:
+  ros__parameters:
+    # ==========================================================
+    #  Ollama LLM 配置
+    # ==========================================================
+    ollama_url: 'http://192.168.31.196:11434'
+    ollama_model: 'qwen2.5:1.5b'
+    # 单个 HTTP 请求超时（秒）
+    ollama_timeout: 30.0
+
+    # ==========================================================
+    #  通用配置
+    # ==========================================================
+    # 系统提示词（家用机器人角色设定）
+    system_prompt: '你是一个家用机器人的语音助手。回复要简短口语化，适合语音播报，每次回复控制在2-3句话以内。'
+    # 本地保留的对话历史轮数
+    max_history: 10
+    # 播报给 TTS 的最大字数，超出会在标点处截断
+    tts_max_chars: 150
+    # 是否启用 LLM 开放对话（false 则只做正则确定性命令匹配）
+    enable_llm: true

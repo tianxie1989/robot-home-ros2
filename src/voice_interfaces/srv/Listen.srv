@@ -1,0 +1,19 @@
+# 语音监听服务
+# voice_interfaces/srv/Listen.srv
+
+# --- 请求 ---
+# 监听超时时间 (秒)
+float32 timeout_sec
+
+# 期望语言 (如: zh-CN)
+string language
+---
+# --- 响应 ---
+# 识别出的文本
+string text
+
+# 识别置信度
+float32 confidence
+
+# 是否成功 (超时或无语音返回 false)
+bool success

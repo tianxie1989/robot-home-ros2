@@ -1,0 +1,31 @@
+# ASR 语音识别配置
+# voice_interaction/config/asr_config.yaml
+
+asr_node:
+  ros__parameters:
+    # 识别引擎: sherpa_onnx
+    engine: 'sherpa_onnx'
+    # 输入模式: microphone (真实麦克风) 或 keyboard (键盘模拟)
+    input_mode: 'microphone'
+    # sherpa-onnx 模型目录（包含 model.int8.onnx 和 tokens.txt）
+    model_dir: '/home/zs/models/sherpa-onnx-streaming-zipformer-zh-14M-2023-02-23'
+    # 音频采样率
+    sample_rate: 16000
+    # 音频输入设备（空=默认设备，即蓝牙音响麦克风；或指定如 'bluez_input.28:48:E7:B3:C6:1A.1'）
+    audio_device: ''
+    # 启用语音活动检测 (VAD)，自动检测说话开始/结束
+    vad_enabled: true
+    # 静音超时（秒），超过此时间判定一句话结束
+    silence_timeout: 2.0
+    # 是否启用状态提示音（请说话/识别中 beep，通过 paplay 走 PipeWire→蓝牙音响）
+    enable_prompt_tones: true
+
+    # ==================== 唤醒词对话模式 ====================
+    # 唤醒词列表：待机（idle）模式下匹配到才进入对话（active）
+    wake_words: ['小机器人', '你好机器人', '小智小智']
+    # 退出命令列表：对话模式下匹配到则返回待机
+    exit_commands: ['结束对话', '再见', '退出', '关闭对话']
+    # 对话模式无语音超时（秒），超时自动返回待机
+    active_timeout: 30.0
+    # 唤醒词模糊匹配（容忍 ASR 识别错字，如“小机人”匹配“小机器人”）
+    wake_word_fuzzy: true

@@ -1,0 +1,12 @@
+# 摄像头配置
+camera:
+  device: "/dev/video0"          # USB摄像头设备路径
+  width: 640
+  height: 480
+  fps: 30
+  pixel_format: "YUYV"
+
+# macOS开发模式（使用笔记本内置摄像头）
+macos_dev:
+  device_index: 0               # OpenCV VideoCapture索引
+  use_cv_capture: true          # 使用OpenCV代替usb_cam

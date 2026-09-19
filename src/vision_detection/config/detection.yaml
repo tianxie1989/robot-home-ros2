@@ -1,0 +1,33 @@
+# 目标检测模型配置
+detection:
+  # 模型文件路径（相对于包目录或绝对路径）
+  model_path: "/Users/zs/Documents/AI_code/ros2_raspberrypi/robot_home/yolov8n.pt"
+  # 模型格式: "onnx" | "pt" | "ncnn"
+  model_format: "onnx"
+
+  # 检测参数
+  confidence_threshold: 0.5
+  nms_threshold: 0.45
+  input_size: 640              # YOLO输入尺寸
+
+  # 推理设备: "cpu" | "cuda" | "mps" (macOS Metal)
+  device: "cpu"
+
+  # 检测类别（家居场景）
+  classes:
+    - toy_block        # 积木玩具
+    - plush_toy        # 毛绒玩具
+    - toy_car          # 玩具车
+    - ball             # 球类
+    - book             # 书本
+    - clothes          # 衣服
+    - shoes            # 鞋子
+    - storage_box      # 收纳箱
+    - cup              # 杯子
+    - remote_control   # 遥控器
+
+  # 检测频率 (Hz)
+  detection_rate: 5.0
+
+  # 发布调试图像
+  publish_debug_image: true

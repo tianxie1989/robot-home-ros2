@@ -1,0 +1,27 @@
+# AI 训练服务器通信配置
+# ai_training_bridge/config/server_config.yaml
+
+model_sync:
+  ros__parameters:
+    # MQTT Broker 地址
+    mqtt_broker_host: 'localhost'
+    mqtt_broker_port: 1883
+    # MQTT 订阅主题
+    mqtt_topic: 'robot_home/model/update'
+    # 模型仓库基础 URL
+    model_base_url: 'http://localhost:8080/models'
+    # 本地模型保存目录
+    model_save_dir: '/tmp/robot_home/models'
+    # 自动下载新模型
+    auto_download: true
+
+data_collector:
+  ros__parameters:
+    # 采集数据保存目录
+    data_save_dir: '/tmp/robot_home/collected_data'
+    # 每个文件最大样本数
+    max_samples_per_file: 100
+    # 是否启用自动上传
+    upload_enabled: false
+    # 数据上传 URL
+    upload_url: 'http://localhost:8080/api/upload'

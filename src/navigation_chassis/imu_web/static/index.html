@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>IMU · 3D 小车姿态 & 曲线面板</title>
+<link rel="stylesheet" href="/static/style.css" />
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+  }
+}
+</script>
+</head>
+<body>
+<div class="app">
+
+  <!-- ─── Header ───────────────────────────────────────── -->
+  <div class="header">
+    <h1>IMU · 3D 姿态与运动曲线</h1>
+    <span class="tag" id="backend-tag">backend: —</span>
+    <span class="tag" id="calib-tag">未标定</span>
+    <span class="spacer"></span>
+    <button id="btn-calib"   title="将当前姿态设为零位：水平 + 正前 + 扣除零偏（请保持静止水平约 3 秒）">标定零位</button>
+    <button id="btn-wizard" title="引导式姿态自检：逐步核对前后/左右/转向方向是否与屏幕一致（类无人机起飞前校准）">姿态自检</button>
+    <button id="btn-demo"   title="用正弦波模拟动作">演示模式</button>
+    <button id="btn-yaw"    title="将当前朝向设为 0°">重置航向</button>
+    <button id="btn-pause"  title="暂停数据刷新">暂停</button>
+    <button id="btn-clear"  title="清空所有曲线">清空曲线</button>
+    <span class="status" id="status">connecting…</span>
+  </div>
+
+  <!-- ─── 3D canvas ────────────────────────────────────── -->
+  <div class="stage" id="stage">
+    <div id="wizard" class="wizard hidden">
+      <div class="wz-head">
+        <span>🧭 姿态自检向导</span><span id="wz-step" class="wz-step">1 / 6</span>
+      </div>
+      <div id="wz-title" class="wz-title"></div>
+      <div id="wz-desc" class="wz-desc"></div>
+      <div class="wz-read"><span id="wz-axis"></span> <b id="wz-val">0.0°</b></div>
+      <div class="wz-btns">
+        <button id="wz-flip" class="wz-flip">🔄 屏幕与实物反了（纠正）</button>
+        <button id="wz-next" class="wz-next">下一步 ▶</button>
+      </div>
+      <button id="wz-exit" class="wz-exit">退出自检</button>
+    </div>
+    <div class="hint">
+      拖拽旋转视角 · 滚轮缩放 · 空格演示 · T 自检 · C 标定
+    </div>
+  </div>
+
+  <!-- ─── Right side numeric HUD ───────────────────────── -->
+  <div class="side">
+    <h3>Attitude 姿态</h3>
+    <div class="row"><span class="k">Roll  横滚</span> <span class="v big" id="v-roll">0.0°</span></div>
+    <div class="row"><span class="k">Pitch 俯仰</span> <span class="v big" id="v-pitch">0.0°</span></div>
+    <div class="row"><span class="k">Yaw   航向</span> <span class="v big" id="v-yaw">0.0°</span></div>
+
+    <hr/>
+    <h3>Accel 加速度 (m/s²)</h3>
+    <div class="row"><span class="k">X 前</span> <span class="v" id="v-ax">0.00</span></div>
+    <div class="row"><span class="k">Y 左</span> <span class="v" id="v-ay">0.00</span></div>
+    <div class="row"><span class="k">Z 上</span> <span class="v" id="v-az">9.81</span></div>
+    <div class="row"><span class="k">|a| 合成</span> <span class="v" id="v-amag">9.81</span></div>
+
+    <hr/>
+    <h3>Gyro 角速度 (°/s)</h3>
+    <div class="row"><span class="k">X roll rate</span> <span class="v" id="v-gx">0.00</span></div>
+    <div class="row"><span class="k">Y pitch rate</span><span class="v" id="v-gy">0.00</span></div>
+    <div class="row"><span class="k">Z yaw rate</span> <span class="v" id="v-gz">0.00</span></div>
+
+    <hr/>
+    <h3>Velocity 速度 (m/s)</h3>
+    <div class="row"><span class="k">Vx</span> <span class="v" id="v-vx">0.00</span></div>
+    <div class="row"><span class="k">Vy</span> <span class="v" id="v-vy">0.00</span></div>
+    <div class="row"><span class="k">Vz</span> <span class="v" id="v-vz">0.00</span></div>
+    <div class="row"><span class="k">|v|</span> <span class="v" id="v-vspeed">0.00</span></div>
+
+    <hr/>
+    <h3>Temperature</h3>
+    <div class="row"><span class="k">Temp</span> <span class="v" id="v-temp">25.0 °C</span></div>
+  </div>
+
+  <!-- ─── Bottom chart strip ───────────────────────────── -->
+  <div class="charts">
+    <div class="chart"><canvas id="c-accel"></canvas></div>
+    <div class="chart"><canvas id="c-gyro"></canvas></div>
+    <div class="chart"><canvas id="c-velocity"></canvas></div>
+    <div class="chart"><canvas id="c-angle"></canvas></div>
+  </div>
+</div>
+
+<script type="module" src="/static/app.js"></script>
+</body>
+</html>

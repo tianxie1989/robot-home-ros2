@@ -1,0 +1,243 @@
+/* IMU Web Dashboard — layout & theme */
+
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #0b1020;
+    color: #c9d4ff;
+    font-family: -apple-system, "Segoe UI", "PingFang SC",
+                 "Microsoft YaHei", Roboto, sans-serif;
+    overflow: hidden;
+}
+
+/* ─── Root grid ─────────────────────────────────────────── */
+.app {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 260px;
+    grid-template-rows: 56px minmax(0, 1fr) minmax(0, 34vh);
+    grid-template-areas:
+        "header  header"
+        "stage   side"
+        "charts  charts";
+    gap: 10px;
+    padding: 10px;
+    height: 100vh;
+}
+
+/* ─── Header ───────────────────────────────────────────── */
+.header {
+    grid-area: header;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 0 14px;
+    background: linear-gradient(90deg, #121833 0%, #0f1735 100%);
+    border: 1px solid #1f2a52;
+    border-radius: 10px;
+}
+.header h1 {
+    font-size: 16px;
+    margin: 0;
+    letter-spacing: 1px;
+    color: #e6ecff;
+}
+.header .tag {
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    background: #1a2450;
+    color: #7fb2ff;
+    border: 1px solid #26356e;
+}
+.header .tag.ok {
+    background: #14361f; color: #7fe0a0; border-color: #1f5c34;
+}
+.header .tag.busy {
+    background: #3a2f10; color: #ffd166; border-color: #6b551f;
+}
+.header .tag.warn {
+    background: #3a1414; color: #ff9a9a; border-color: #6b2626;
+}
+.header .spacer { flex: 1; }
+.header button {
+    background: #1e2a55;
+    color: #d3ddff;
+    border: 1px solid #31417d;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background .15s;
+}
+.header button:hover { background: #2b3b76; }
+.header button.active { background: #2f6dfc; color: white; border-color: #2f6dfc; }
+.header .status {
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 12px;
+    color: #7fe0a0;
+    min-width: 90px;
+    text-align: right;
+}
+.header .status.off { color: #ff7b7b; }
+
+/* ─── 3D stage ─────────────────────────────────────────── */
+.stage {
+    grid-area: stage;
+    position: relative;
+    background: #0e1220;
+    border: 1px solid #1f2a52;
+    border-radius: 10px;
+    overflow: hidden;
+    min-height: 0;
+}
+.stage canvas { display: block; width: 100%; height: 100%; }
+.stage .hint {
+    position: absolute;
+    left: 12px;
+    bottom: 10px;
+    font-size: 11px;
+    color: #6b7ba8;
+    background: rgba(14, 18, 32, 0.6);
+    padding: 3px 8px;
+    border-radius: 4px;
+    pointer-events: none;
+}
+
+/* ─── Right side panel ─────────────────────────────────── */
+.side {
+    grid-area: side;
+    background: #101634;
+    border: 1px solid #1f2a52;
+    border-radius: 10px;
+    padding: 12px 14px;
+    overflow: auto;
+    min-height: 0;
+}
+.side h3 {
+    margin: 6px 0 8px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #7fb2ff;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.side .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 13px;
+    padding: 2px 0;
+}
+.side .row .k { color: #8fa1d8; }
+.side .row .v { color: #eaf0ff; }
+.side .row .v.big { font-size: 18px; font-weight: 600; }
+.side hr {
+    border: 0;
+    height: 1px;
+    background: #1f2a52;
+    margin: 10px 0;
+}
+
+/* ─── Charts ───────────────────────────────────────────── */
+.charts {
+    grid-area: charts;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    min-height: 0;
+}
+.chart {
+    position: relative;
+    background: #0e1220;
+    border: 1px solid #1f2a52;
+    border-radius: 10px;
+    overflow: hidden;
+    min-height: 0;
+}
+.chart canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* ─── Responsive fallback ─────────────────────────────── */
+@media (max-width: 900px) {
+    .app {
+        grid-template-columns: 1fr;
+        grid-template-rows: 56px minmax(0, 50vh) auto minmax(0, 45vh);
+        grid-template-areas:
+            "header"
+            "stage"
+            "side"
+            "charts";
+    }
+    .charts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ─── Pose self-test wizard (floats over the 3D stage) ── */
+.wizard {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 300px;
+    max-width: calc(100% - 24px);
+    background: rgba(16, 22, 52, 0.92);
+    border: 1px solid #31417d;
+    border-radius: 10px;
+    padding: 12px 14px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, .45);
+    backdrop-filter: blur(3px);
+    z-index: 5;
+}
+.wizard.hidden { display: none; }
+.wz-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #7fb2ff;
+    font-weight: 600;
+}
+.wz-step { font-family: ui-monospace, Menlo, monospace; color: #8fa1d8; font-weight: 400; }
+.wz-title { margin-top: 8px; font-size: 14px; font-weight: 600; color: #eaf0ff; }
+.wz-desc  { margin-top: 4px; font-size: 12px; line-height: 1.5; color: #aebbe6; min-height: 36px; }
+.wz-read {
+    margin-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 12px;
+    color: #8fa1d8;
+}
+.wz-read b { color: #ffd166; font-size: 17px; }
+.wz-btns { display: flex; gap: 8px; margin-top: 10px; }
+.wz-btns button {
+    flex: 1;
+    padding: 8px 6px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    border: 1px solid #31417d;
+}
+.wz-flip { background: #3a2f10; color: #ffd166; border-color: #6b551f; }
+.wz-flip:hover { background: #4d3d13; }
+.wz-next { background: #2f6dfc; color: #fff; border-color: #2f6dfc; }
+.wz-next:hover { background: #3f7bff; }
+.wz-exit {
+    margin-top: 8px;
+    width: 100%;
+    background: transparent;
+    color: #6b7ba8;
+    border: 1px solid #26356e;
+    border-radius: 6px;
+    padding: 5px;
+    font-size: 11px;
+    cursor: pointer;
+}
+.wz-exit:hover { color: #c9d4ff; }

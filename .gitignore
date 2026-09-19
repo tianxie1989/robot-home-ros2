@@ -1,0 +1,21 @@
+# ROS2 / colcon build artifacts
+build/
+install/
+log/
+.colcon*
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+
+# Large model weights — downloaded separately (see README)
+*.onnx
+*.pt
+*.pth
+*.tflite
+
+# OS / editors
+.DS_Store

@@ -1,0 +1,19 @@
+# TTS 语音合成配置
+# voice_interaction/config/tts_config.yaml
+
+tts_node:
+  ros__parameters:
+    # 引擎类型: 'piper' (Piper TTS) / 'sherpa_onnx' / 'print' (打印输出)
+    engine_type: 'piper'
+    # Piper 模型路径
+    model_path: '/home/zs/models/zh_CN-huayan-medium.onnx'
+    # Piper 配置文件路径（可选，部分模型需要）
+    config_path: '/home/zs/models/zh_CN-huayan-medium.onnx.json'
+    # 音频输出设备（null=默认设备，或指定如 'hw:1,0'）
+    output_device: null
+    # 语速（1.0=正常）
+    speed: 1.0
+    # 音量（0.0 ~ 1.0）
+    volume: 0.9
+    # 是否启用状态提示音（TTS 播放前的“AI回复” beep，通过 paplay 走 PipeWire→蓝牙音响）
+    enable_prompt_tones: true

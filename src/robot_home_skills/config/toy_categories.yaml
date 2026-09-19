@@ -1,0 +1,82 @@
+# 玩具分类规则配置
+# robot_home_skills/config/toy_categories.yaml
+
+# 玩具类别定义
+categories:
+  toy_block:
+    display_name: "积木"
+    bin_name: "toy_bin"
+    bin_position: [-1.5, 2.0, 0.0]
+    description: "各种颜色和形状的积木块"
+    examples:
+      - "红色积木"
+      - "蓝色方块"
+      - "乐高积木"
+
+  toy_car:
+    display_name: "玩具车"
+    bin_name: "toy_bin"
+    bin_position: [-1.5, 2.0, 0.0]
+    description: "玩具汽车、卡车等"
+    examples:
+      - "红色小汽车"
+      - "蓝色卡车"
+
+  toy_doll:
+    display_name: "玩偶"
+    bin_name: "toy_bin"
+    bin_position: [-1.5, 2.0, 0.0]
+    description: "毛绒玩具、布偶等"
+    examples:
+      - "泰迪熊"
+      - "布娃娃"
+
+  toy_ball:
+    display_name: "球类玩具"
+    bin_name: "toy_bin"
+    bin_position: [-1.5, 2.0, 0.0]
+    description: "各种球类玩具"
+    examples:
+      - "皮球"
+      - "足球"
+
+  book:
+    display_name: "书籍"
+    bin_name: "bookshelf"
+    bin_position: [2.5, 0.0, 0.6]
+    description: "绘本、图书等"
+    examples:
+      - "故事书"
+      - "图画书"
+
+  clothes:
+    display_name: "衣物"
+    bin_name: "laundry_basket"
+    bin_position: [-2.0, -1.0, 0.0]
+    description: "衣服、袜子等"
+    examples:
+      - "T恤"
+      - "袜子"
+      - "裤子"
+
+# 收纳位置配置
+storage_locations:
+  toy_bin:
+    name: "玩具收纳箱"
+    position: [-1.5, 2.0, 0.0]
+    description: "客厅角落的蓝色收纳箱"
+
+  bookshelf:
+    name: "书架"
+    position: [2.5, 0.0, 0.6]
+    description: "东墙书架"
+
+  laundry_basket:
+    name: "洗衣篮"
+    position: [-2.0, -1.0, 0.0]
+    description: "卧室旁的洗衣篮"
+
+  kitchen_counter:
+    name: "厨房台面"
+    position: [2.0, -2.0, 0.8]
+    description: "厨房操作台"

@@ -1,0 +1,16 @@
+# 取消任务服务
+# task_interfaces/srv/CancelTask.srv
+
+# --- 请求 ---
+# 要取消的任务ID
+string task_id
+
+# 取消原因
+string reason
+---
+# --- 响应 ---
+# 是否成功取消
+bool success
+
+# 状态信息
+string message

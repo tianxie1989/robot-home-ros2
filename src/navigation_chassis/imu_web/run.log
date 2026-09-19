@@ -1,0 +1,41 @@
+=== IMU Web Dashboard ===
+Backend: smbus2
+Serving on  http://0.0.0.0:8000   (Ctrl+C to stop)[calib] loaded from calibration.json
+
+Open in browser: http://<rpi-ip>:8000
+[imu_loop] error: [Errno 121] Remote I/O error
+[imu_loop] error: [Errno 121] Remote I/O error
+[imu_loop] error: [Errno 121] Remote I/O error
+[calib] done  gyro_bias=(-3.028, -0.202, -1.98)  accel_bias=(-0.06, -1.1965, -0.3093)
+[imu_loop] error: [Errno 110] Connection timed out
+[imu_loop] error: [Errno 121] Remote I/O error
+[imu_loop] error: [Errno 121] Remote I/O error
+[imu_loop] error: [Errno 121] Remote I/O error
+[imu_loop] error: [Errno 110] Connection timed out
+[imu_loop] error: [Errno 121] Remote I/O error
+[imu_loop] error: [Errno 121] Remote I/O error
+[imu_loop] error: [Errno 121] Remote I/O error
+[calib] done  gyro_bias=(-3.036, -0.183, -2.002)  accel_bias=(-0.0694, -1.1585, -0.2959)
+[imu_loop] error: [Errno 121] Remote I/O error
+[imu_loop] error: [Errno 110] Connection timed out
+[imu_loop] error: [Errno 110] Connection timed out
+[imu_loop] error: [Errno 121] Remote I/O error
+[imu_loop] error: [Errno 121] Remote I/O error
+[imu_loop] error: [Errno 121] Remote I/O error
+[imu_loop] error: [Errno 121] Remote I/O error
+[imu_loop] error: [Errno 121] Remote I/O error
+[imu_loop] error: [Errno 110] Connection timed out
+[imu_loop] error: [Errno 121] Remote I/O error
+[imu_loop] error: [Errno 121] Remote I/O error
+[imu_loop] error: [Errno 121] Remote I/O error
+[imu_loop] error: [Errno 121] Remote I/O error
+[imu_loop] error: [Errno 121] Remote I/O error
+[imu_loop] error: [Errno 121] Remote I/O error
+[imu_loop] error: [Errno 121] Remote I/O error
+[imu_loop] error: [Errno 121] Remote I/O error
+[imu_loop] error: [Errno 110] Connection timed out
+[imu_loop] error: [Errno 121] Remote I/O error
+[imu_loop] error: [Errno 121] Remote I/O error
+[imu_loop] error: [Errno 121] Remote I/O error
+[imu_loop] error: [Errno 121] Remote I/O error
+[imu_loop] error: [Errno 110] Connection timed out

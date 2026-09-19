@@ -1,0 +1,5 @@
+# 请求一次检测
+---
+vision_interfaces/DetectedObjectArray detected_objects
+bool success
+string message

@@ -1,0 +1,10 @@
+# 激光雷达参数 (RPLiDAR A1/A2)
+lidar:
+  port: "/dev/ttyUSB0"
+  frame_id: "lidar_link"
+  angle_compensate: true
+  scan_mode: "Standard"
+  serial_baudrate: 115200
+  inverted: false
+  angle_min: 0.0
+  angle_max: 360.0

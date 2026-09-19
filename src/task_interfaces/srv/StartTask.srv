@@ -1,0 +1,22 @@
+# 启动任务服务
+# task_interfaces/srv/StartTask.srv
+
+# --- 请求 ---
+# 任务名称
+string task_name
+
+# 任务参数 (JSON 字符串)
+string params
+
+# 优先级
+uint8 priority
+---
+# --- 响应 ---
+# 是否成功接受任务
+bool success
+
+# 分配的任务ID
+string task_id
+
+# 状态信息
+string message

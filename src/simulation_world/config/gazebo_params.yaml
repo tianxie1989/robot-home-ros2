@@ -1,0 +1,36 @@
+# Gazebo 仿真参数配置
+# simulation_world/config/gazebo_params.yaml
+
+gazebo:
+  ros__parameters:
+    # 物理引擎
+    physics_engine: 'ode'
+    # 实时因子 (1.0 = 实时)
+    real_time_factor: 1.0
+    # 最大步长
+    max_step_size: 0.001
+    # 实时更新频率
+    real_time_update_rate: 1000
+
+    # 渲染
+    render_engine: 'ogre2'
+
+    # 传感器
+    camera:
+      image_width: 640
+      image_height: 480
+      fov: 1.047  # 60 degrees
+
+    lidar:
+      samples: 360
+      range_min: 0.1
+      range_max: 10.0
+      update_rate: 10.0
+
+spawn_entity:
+  ros__parameters:
+    # 机器人初始位置
+    spawn_x: 0.0
+    spawn_y: 0.0
+    spawn_z: 0.1
+    spawn_yaw: 0.0

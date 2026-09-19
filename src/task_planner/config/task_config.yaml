@@ -1,0 +1,51 @@
+# 任务规划配置
+# task_planner/config/task_config.yaml
+
+task_manager:
+  ros__parameters:
+    # 最大并发任务数
+    max_concurrent_tasks: 1
+    # 任务队列最大长度
+    max_queue_size: 10
+    # 任务超时时间(秒)
+    task_timeout_sec: 300
+    # 任务失败重试次数
+    max_retries: 2
+
+# 技能注册表
+skills:
+  pick_toy:
+    description: "捡玩具 - 检测、导航到玩具、抓取并放入收纳箱"
+    timeout_sec: 120
+    requires_vision: true
+    requires_navigation: true
+    requires_arm: true
+
+  cleanup_area:
+    description: "整理指定区域 - 扫描区域内物品并逐一归位"
+    timeout_sec: 600
+    requires_vision: true
+    requires_navigation: true
+    requires_arm: true
+
+  sort_objects:
+    description: "物品分类 - 检测物体并按类别分类放置"
+    timeout_sec: 300
+    requires_vision: true
+    requires_arm: true
+
+  fold_clothes:
+    description: "叠衣服 - 检测衣物并执行折叠动作序列"
+    timeout_sec: 300
+    requires_vision: true
+    requires_arm: true
+
+# 命令关键词映射
+command_keywords:
+  捡玩具: pick_toy
+  收拾玩具: pick_toy
+  整理房间: cleanup_area
+  收拾客厅: cleanup_area
+  叠衣服: fold_clothes
+  分类物品: sort_objects
+  抓取: pick_toy

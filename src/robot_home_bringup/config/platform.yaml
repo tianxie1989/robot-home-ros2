@@ -1,0 +1,22 @@
+# 平台特定参数
+platform:
+  # 运行平台: "macos_dev" | "raspberry_pi" | "linux_laptop"
+  type: "macos_dev"
+
+  # 树莓派5特定配置
+  raspberry_pi:
+    gpio_chip: 0
+    i2c_bus: 1
+    serial_ports:
+      arm: "/dev/ttyAMA0"
+      lidar: "/dev/ttyUSB0"
+
+  # Linux笔记本特定配置
+  linux_laptop:
+    gpu_device: "/dev/dri/renderD128"
+    cuda_visible_devices: "0"
+
+  # 通用配置
+  camera_device: "/dev/video0"
+  max_linear_velocity: 0.5   # m/s
+  max_angular_velocity: 1.0  # rad/s

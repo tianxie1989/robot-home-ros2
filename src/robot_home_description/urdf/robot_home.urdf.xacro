@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<!-- 家用机器人主URDF描述文件 -->
+<!-- 集成底盘 + 机械臂 + 夹爪 + 传感器 -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot_home">
+
+  <!-- 引入子模块 -->
+  <xacro:include filename="$(find robot_home_description)/urdf/chassis.urdf.xacro"/>
+  <xacro:include filename="$(find robot_home_description)/urdf/arm.urdf.xacro"/>
+  <xacro:include filename="$(find robot_home_description)/urdf/gripper.urdf.xacro"/>
+
+  <!-- 机器人基础参数 -->
+  <xacro:property name="chassis_length" value="0.35"/>
+  <xacro:property name="chassis_width" value="0.30"/>
+  <xacro:property name="chassis_height" value="0.15"/>
+  <xacro:property name="wheel_radius" value="0.05"/>
+  <xacro:property name="wheel_separation" value="0.28"/>
+
+  <!-- 底盘 -->
+  <xacro:chassis
+    length="${chassis_length}"
+    width="${chassis_width}"
+    height="${chassis_height}"
+    wheel_radius="${wheel_radius}"
+    wheel_separation="${wheel_separation}"
+  />
+
+  <!-- 机械臂（安装在底盘顶部前方） -->
+  <xacro:arm parent="base_link">
+    <origin xyz="0.1 0 0.15" rpy="0 0 0"/>
+  </xacro:arm>
+
+  <!-- 夹爪（安装在机械臂末端） -->
+  <xacro:gripper parent="arm_link_6">
+    <origin xyz="0 0 0.02" rpy="0 0 0"/>
+  </xacro:gripper>
+
+  <!-- 激光雷达（安装在底盘顶部中央） -->
+  <link name="lidar_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.035" length="0.04"/>
+      </geometry>
+      <material name="dark_grey">
+        <color rgba="0.3 0.3 0.3 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.035" length="0.04"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.2"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+    </inertial>
+  </link>
+  <joint name="lidar_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="lidar_link"/>
+    <origin xyz="0 0 0.195" rpy="0 0 0"/>
+  </joint>
+
+  <!-- 深度相机（安装在底盘前方，略高于底盘） -->
+  <link name="camera_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.09 0.025 0.025"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0.1 0.1 0.1 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.09 0.025 0.025"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.07"/>
+      <inertia ixx="0.00001" ixy="0" ixz="0" iyy="0.00001" iyz="0" izz="0.00001"/>
+    </inertial>
+  </link>
+  <joint name="camera_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="camera_link"/>
+    <origin xyz="0.175 0 0.08" rpy="0 0.1 0"/>
+  </joint>
+
+  <!-- 相机光学坐标系（ROS标准：z向前，y向下，x向右） -->
+  <link name="camera_optical_link"/>
+  <joint name="camera_optical_joint" type="fixed">
+    <parent link="camera_link"/>
+    <child link="camera_optical_link"/>
+    <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
+  </joint>
+
+  <!-- IMU传感器 -->
+  <link name="imu_link">
+    <inertial>
+      <mass value="0.01"/>
+      <inertia ixx="0.000001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000001"/>
+    </inertial>
+  </link>
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+    <origin xyz="0 0 0.1" rpy="0 0 0"/>
+  </joint>
+
+</robot>

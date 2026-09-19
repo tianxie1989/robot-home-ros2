@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>arm_control</name>
+  <version>0.1.0</version>
+  <description>MoveIt2 机械臂控制功能包，提供6DOF机械臂的运动规划、轨迹控制与抓取放置功能</description>
+  <maintainer email="team@robathome.local">Robot Home Team</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclpy</depend>
+  <depend>moveit_ros_planning_interface</depend>
+  <depend>moveit_ros_move_group</depend>
+  <depend>moveit_planners_ompl</depend>
+  <depend>moveit_kinematics</depend>
+  <depend>moveit_ros_visualization</depend>
+  <depend>ros2_control</depend>
+  <depend>ros2_controllers</depend>
+  <depend>joint_trajectory_controller</depend>
+  <depend>joint_state_publisher</depend>
+  <depend>robot_home_description</depend>
+  <depend>controller_manager</depend>
+  <depend>xacro</depend>
+
+  <exec_depend>rviz2</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
